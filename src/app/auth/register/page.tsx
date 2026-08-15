@@ -2,7 +2,7 @@
 
 import {useState} from "react";
 import { useRouter } from "next/navigation";
-import {Eye,EyeOff,User,Lock,Mail,ArrowLeft,Check,GraduationCap,ClipboardList,BarChart3,ShieldCheck} from "lucide-react";
+import {Eye,EyeOff,User,Lock,Mail,ArrowLeft,Check,GraduationCap,ClipboardList,BarChart3,ShieldCheck,Gamepad2, Laptop} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import type { CSSProperties } from "react";
@@ -98,26 +98,35 @@ export default function RegisterPage() {
                         <GraduationCap className="size-7 text-black" />
                     </div>
                     <h1 className="vh-stagger text-4xl leading-tight font-bold tracking-tight" style={stagger(140)}>
-                        Riffat Manajemen{" "}
-                        <span className="text-white/80">
-                            Siswa
+                        <span className="text-white/85">
+                            Muhammad
+                        </span>
+                        {""} Riffat {" "}
+                        <span className="text-white/85">
+                            Rizqullah
                         </span>
                     </h1>
                     <p className="vh-stagger mt-4 max-w-md text-lg leading-relaxed text-white/60" style={stagger(220)}>
-                        Kelola data siswa, kelas, dan nilai dalam satu platform yang modern dan mudah digunakan.
+                        Menyediakan Software Tools untuk Windows dan Android, dan Permainan Video yang dapat dimainkan dengan gratis.
                     </p>
                     <ul className="mt-10 space-y-4">
                         <li className="vh-stagger flex items-center gap-3 text-white/75" style={stagger(300)}>
                             <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:border-white/30">
-                                <ClipboardList className="size-4 text-white/80" />
+                                <Laptop className="size-4 text-white/80" />
                             </span>
-                            Kelola data siswa dan kelas secara terpusat
+                            Unduh software dan gunakan secara online maupun offline
+                        </li>
+                        <li className="vh-stagger flex items-center gap-3 text-white/75" style={stagger(300)}>
+                            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:border-white/30">
+                                <Gamepad2 className="size-4 text-white/80" />
+                            </span>
+                            Unduh permainan video dan dapat dimainkan kapan saja
                         </li>
                         <li className="vh-stagger flex items-center gap-3 text-white/75" style={stagger(380)}>
                             <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:border-white/30">
                                 <BarChart3 className="size-4 text-white/80" />
                             </span>
-                            Pantau progres dan laporan nilai otomatis
+                            Dapatkan update fitur terbaru secara otomatis dan gratis
                         </li>
                         <li className="vh-stagger flex items-center gap-3 text-white/75" style={stagger(460)}>
                             <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:border-white/30">
@@ -148,15 +157,15 @@ export default function RegisterPage() {
                         <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-xl bg-white shadow-lg shadow-black/60">
                             <User className="size-6 text-black" />
                         </div>
-                        <h1 className="text-2xl font-bold tracking-tight">Create an account</h1>
-                        <p className="mt-1.5 text-sm text-white/50">Join us today — it only takes a minute.</p>
+                        <h1 className="text-2xl font-bold tracking-tight">Buat akun baru</h1>
+                        <p className="mt-1.5 text-sm text-white/50">Gabung sekarang — cuma butuh semenit.</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         {/* Name */}
                         <div>
                             <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-white/80">
-                                Name
+                                Nama
                             </label>
                             <div className="relative">
                                 <User className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/40" />
@@ -164,7 +173,7 @@ export default function RegisterPage() {
                                     id="name"
                                     name="name"
                                     type="text"
-                                    placeholder="Enter your full name"
+                                    placeholder="Masukkan nama lengkap Anda"
                                     autoComplete="name"
                                     value={formdata.name}
                                     onChange={handleInputChange}
@@ -204,7 +213,7 @@ export default function RegisterPage() {
                                     id="password"
                                     name="password"
                                     type={showPassword ? "text" : "password"}
-                                    placeholder="Create a password"
+                                    placeholder="Buat password"
                                     autoComplete="new-password"
                                     value={formdata.password}
                                     onChange={handleInputChange}
@@ -241,7 +250,7 @@ export default function RegisterPage() {
                         {/* Confirm Password */}
                         <div>
                             <label htmlFor="confirmPassword" className="mb-1.5 block text-sm font-medium text-white/80">
-                                Confirm Password
+                                Konfirmasi Password
                             </label>
                             <div className="relative">
                                 <Lock className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/40" />
@@ -249,7 +258,7 @@ export default function RegisterPage() {
                                     id="confirmPassword"
                                     name="confirmPassword"
                                     type={showconfirmPassword ? "text" : "password"}
-                                    placeholder="Re-enter your password"
+                                    placeholder="Konfirmasi password"
                                     autoComplete="new-password"
                                     value={formdata.confirmPassword}
                                     onChange={handleInputChange}
@@ -285,21 +294,21 @@ export default function RegisterPage() {
                                 onClick={() => setAcceptedTerms(!acceptedterms)}
                                 className="cursor-pointer text-sm leading-relaxed text-white/60 select-none"
                             >
-                                I accept the{" "}
+                                Aku telah menyetujui{" "}
                                 <a
                                     href="#"
                                     onClick={(e) => e.preventDefault()}
                                     className="vh-underline font-medium text-white hover:text-white"
                                 >
-                                    Terms of Service
+                                    Syarat & Ketentuan Layanan
                                 </a>{" "}
-                                and{" "}
+                                dan{" "}
                                 <a
                                     href="#"
                                     onClick={(e) => e.preventDefault()}
                                     className="vh-underline font-medium text-white hover:text-white"
                                 >
-                                    Privacy Policy
+                                    Kebijakan Privasi
                                 </a>
                             </p>
                         </div>

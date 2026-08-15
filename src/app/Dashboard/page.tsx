@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-
+import {Eye,EyeOff,User,Lock,Mail,ArrowLeft,Check,GraduationCap,ClipboardList,BarChart3,ShieldCheck,Gamepad2, Laptop} from "lucide-react";
 const stagger = (ms: number) => ({ "--vh-delay": `${ms}ms` }) as CSSProperties;
 
 export default function DashboardPage() {
