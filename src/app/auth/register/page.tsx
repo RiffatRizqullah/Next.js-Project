@@ -325,13 +325,13 @@ export default function RegisterPage() {
                     </form>
 
                     <p className="mt-6 text-center text-sm text-white/50">
-                        Already have an account?{" "}
+                        Sudah punya akun?{" "}
                         <button
                             type="button"
                             onClick={() => router.push("/auth/login")}
                             className="vh-underline font-medium text-white transition-colors hover:text-white"
                         >
-                            Sign in
+                            Login
                         </button>
                     </p>
                 </div>
