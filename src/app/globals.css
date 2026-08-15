@@ -77,7 +77,7 @@
   --destructive: oklch(0.985 0 0);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.708 0 0);
+  --ring: oklch(0.985 0 0);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -104,6 +104,47 @@
   h2,
   h3 {
     @apply font-heading tracking-tight;
+  }
+
+  /* ─── Global interaction motion ──────────────────────────────── */
+
+  /* Buttons — soft lift on hover, tactile press on click */
+  [data-slot="button"] {
+    transition:
+      transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background-color 0.18s ease,
+      border-color 0.18s ease,
+      color 0.18s ease,
+      box-shadow 0.18s ease,
+      opacity 0.18s ease;
+  }
+  [data-slot="button"]:hover:not(:disabled):not([aria-disabled="true"]) {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px -12px oklch(0 0 0 / 80%);
+  }
+  [data-slot="button"]:active:not(:disabled):not([aria-disabled="true"]) {
+    transform: translateY(0) scale(0.96);
+    box-shadow: 0 2px 8px -4px oklch(0 0 0 / 80%);
+  }
+
+  /* Links — underline slides in from the left */
+  a:not([class]) {
+    position: relative;
+  }
+
+  /* Inputs — brighten border on hover, white glow + lift on focus */
+  [data-slot="input"] {
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease,
+      transform 0.2s ease;
+  }
+  [data-slot="input"]:hover:not(:disabled):not(:focus-visible) {
+    border-color: oklch(1 0 0 / 40%);
+  }
+  [data-slot="input"]:focus-visible {
+    transform: translateY(-1px);
   }
 
   /* Sidebar menu buttons — animated hover slide + press */
@@ -133,6 +174,27 @@
     caret-color: #fff;
     transition: background-color 5000s ease-in-out 0s;
   }
+}
+
+/* Thin, quiet monochrome scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(1 0 0 / 18%);
+  border-radius: 999px;
+  border: 2px solid oklch(0.145 0 0);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(1 0 0 / 35%);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(1 0 0 / 25%) transparent;
 }
 
 /* ─── Motion system ──────────────────────────────────────────────────── */
@@ -180,11 +242,13 @@
 @keyframes vh-page-in {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(16px);
+    filter: blur(6px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
   }
 }
 @keyframes vh-rise {
@@ -195,6 +259,16 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@keyframes vh-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 
@@ -250,11 +324,52 @@
 
   /* Page + content entrance transitions */
   .vh-page-in {
-    animation: vh-page-in 0.45s ease-out both;
+    animation: vh-page-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
   .vh-rise {
     opacity: 0;
-    animation: vh-rise 0.5s ease-out forwards;
+    animation: vh-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .vh-pop {
+    opacity: 0;
+    animation: vh-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  /* Staggered entrance — set --vh-delay on each child */
+  .vh-stagger {
+    opacity: 0;
+    animation: vh-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--vh-delay, 0ms);
+  }
+
+  /* Card / panel hover — quiet lift with brightening border */
+  .vh-card {
+    transition:
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      background-color 0.25s ease;
+  }
+  .vh-card:hover {
+    transform: translateY(-3px);
+    border-color: oklch(1 0 0 / 30%);
+    box-shadow: 0 14px 40px -18px oklch(0 0 0 / 90%);
+  }
+  .vh-card:active {
+    transform: translateY(-1px) scale(0.99);
+  }
+
+  /* Underline slide for text links */
+  .vh-underline {
+    position: relative;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.25s ease;
+  }
+  .vh-underline:hover {
+    background-size: 100% 1px;
   }
 }
 

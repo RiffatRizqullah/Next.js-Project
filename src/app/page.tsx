@@ -1,43 +1,34 @@
-import Image from "next/image";
+import type { CSSProperties } from "react";
+
+const stagger = (ms: number) => ({ "--vh-delay": `${ms}ms` }) as CSSProperties;
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-           Saya Muhammad Riffat Rizqullah Dari Kelas XIC
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            lagi belajar next.js, dengan bikin projek Sistem Manajemen Siswa.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+    <div className="flex min-h-svh flex-1 flex-col items-center justify-center bg-black px-6 font-sans text-white">
+      <main className="vh-grid relative flex w-full max-w-3xl flex-1 flex-col items-center justify-center gap-8 overflow-hidden rounded-none px-16 py-32 text-center sm:items-start sm:text-left">
+        <p
+          className="vh-stagger rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-widest text-white/60 uppercase"
+          style={stagger(60)}
+        >
+          Sistem Informasi Manajemen Siswa
+        </p>
+        <h1 className="vh-stagger max-w-xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl" style={stagger(140)}>
+          Saya Muhammad Riffat Rizqullah <span className="text-white/60">Dari Kelas XIC</span>
+        </h1>
+        <p className="vh-stagger max-w-md text-lg leading-8 text-white/60" style={stagger(220)}>
+          lagi belajar next.js, dengan bikin projek Sistem Manajemen Siswa.
+        </p>
+        <div className="vh-stagger mt-4 flex flex-col gap-4 text-base font-medium sm:flex-row" style={stagger(300)}>
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
+            className="vh-card flex h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-black md:w-auto"
             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
             Deploy Now
           </a>
           <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
+            className="vh-card flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-transparent px-6 text-white hover:border-white/50 hover:bg-white/5 md:w-auto"
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"

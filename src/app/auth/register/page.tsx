@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import {Eye,EyeOff,User,Lock,Mail,ArrowLeft,Check,GraduationCap,ClipboardList,BarChart3,ShieldCheck} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-export default function KelasPage() {
+import type { CSSProperties } from "react";
+export default function RegisterPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [showconfirmPassword, setShowConfirmPassword] = useState(false);
     const [acceptedterms, setAcceptedTerms] = useState(false);
@@ -43,13 +44,13 @@ export default function KelasPage() {
 
     const getpasswordstrength = (password: string) => {
         if(!password){
-            return {text: "", color: ""};
+            return {text: "", color: "text-white/40"};
         } else if (password.length < 6) {
-            return {text: "lemah", color: "text-red-500"};
+            return {text: "lemah", color: "text-white/40"};
         } else if (password.length < 10) {
-            return {text: "sedang", color: "text-yellow-500"};
+            return {text: "sedang", color: "text-white/70"};
         } else {
-            return {text: "kuat", color: "text-green-500"};
+            return {text: "kuat", color: "text-white"};
         }
     }
 
@@ -58,25 +59,27 @@ export default function KelasPage() {
         passwordStrength.text === "lemah" ? 1 : passwordStrength.text === "sedang" ? 2 : passwordStrength.text === "kuat" ? 3 : 0;
     const strengthBarColor =
         passwordStrength.text === "lemah"
-            ? "bg-red-500"
+            ? "bg-white/30"
             : passwordStrength.text === "sedang"
-              ? "bg-yellow-500"
+              ? "bg-white/60"
               : passwordStrength.text === "kuat"
-                ? "bg-green-500"
+                ? "bg-white"
                 : "bg-white/10";
 
     const isformvalid = formdata.name && formdata.email && formdata.password && formdata.confirmPassword && acceptedterms;
 
     const inputClass =
-        "h-11! w-full rounded-xl! border border-white/10! bg-white/[0.04]! pl-10! pr-10! text-sm! text-white! placeholder:text-white/30! focus-visible:border-indigo-400/60! focus-visible:ring-3! focus-visible:ring-indigo-400/20!";
+        "h-11! w-full rounded-xl! border border-white/10! bg-white/[0.04]! pl-10! pr-10! text-sm! text-white! placeholder:text-white/30! focus-visible:border-white/70! focus-visible:ring-3! focus-visible:ring-white/15!";
+
+    const stagger = (ms: number) => ({ "--vh-delay": `${ms}ms` }) as CSSProperties;
 
     return (
-        <div className="register-page relative flex min-h-screen w-full overflow-hidden bg-[#09090b] text-white">
+        <div className="register-page relative flex min-h-screen w-full overflow-hidden bg-black text-white">
             {/* Left decorations */}
             <div className="pointer-events-none absolute inset-0">
-                    <div className="absolute -top-32 -left-32 h-[30rem] w-[30rem] rounded-full bg-indigo-600/30 blur-3xl" />
-                    <div className="absolute top-1/2 -right-24 h-[26rem] w-[26rem] -translate-y-1/2 rounded-full bg-blue-600/25 blur-3xl" />
-                    <div className="absolute -bottom-40 left-1/4 h-96 w-96 rounded-full bg-purple-600/20 blur-3xl" />
+                    <div className="absolute -top-32 -left-32 h-[30rem] w-[30rem] rounded-full bg-white/[0.04] blur-3xl" />
+                    <div className="absolute top-1/2 -right-24 h-[26rem] w-[26rem] -translate-y-1/2 rounded-full bg-white/[0.03] blur-3xl" />
+                    <div className="absolute -bottom-40 left-1/4 h-96 w-96 rounded-full bg-white/[0.02] blur-3xl" />
                     <div
                         className="absolute inset-0 opacity-[0.12]"
                         style={{
@@ -85,40 +88,40 @@ export default function KelasPage() {
                             backgroundSize: "48px 48px",
                         }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
                 </div>
             <div className="relative hidden w-1/2 overflow-hidden lg:block">
                 
 
                 <div className="relative z-10 flex h-full flex-col justify-center px-12 py-12 xl:px-16">
-                    <div className="mb-8 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-600 shadow-xl shadow-indigo-500/40">
-                        <GraduationCap className="size-7 text-white" />
+                    <div className="vh-stagger mb-8 flex size-14 items-center justify-center rounded-2xl bg-white shadow-xl shadow-black/60" style={stagger(60)}>
+                        <GraduationCap className="size-7 text-black" />
                     </div>
-                    <h1 className="text-4xl leading-tight font-bold tracking-tight">
+                    <h1 className="vh-stagger text-4xl leading-tight font-bold tracking-tight" style={stagger(140)}>
                         Riffat Manajemen{" "}
-                        <span className="bg-gradient-to-r from-indigo-400 to-blue-400 bg-clip-text text-transparent">
+                        <span className="text-white/80">
                             Siswa
                         </span>
                     </h1>
-                    <p className="mt-4 max-w-md text-lg leading-relaxed text-white/60">
+                    <p className="vh-stagger mt-4 max-w-md text-lg leading-relaxed text-white/60" style={stagger(220)}>
                         Kelola data siswa, kelas, dan nilai dalam satu platform yang modern dan mudah digunakan.
                     </p>
                     <ul className="mt-10 space-y-4">
-                        <li className="flex items-center gap-3 text-white/75">
-                            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5">
-                                <ClipboardList className="size-4 text-indigo-300" />
+                        <li className="vh-stagger flex items-center gap-3 text-white/75" style={stagger(300)}>
+                            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:border-white/30">
+                                <ClipboardList className="size-4 text-white/80" />
                             </span>
                             Kelola data siswa dan kelas secara terpusat
                         </li>
-                        <li className="flex items-center gap-3 text-white/75">
-                            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5">
-                                <BarChart3 className="size-4 text-indigo-300" />
+                        <li className="vh-stagger flex items-center gap-3 text-white/75" style={stagger(380)}>
+                            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:border-white/30">
+                                <BarChart3 className="size-4 text-white/80" />
                             </span>
                             Pantau progres dan laporan nilai otomatis
                         </li>
-                        <li className="flex items-center gap-3 text-white/75">
-                            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5">
-                                <ShieldCheck className="size-4 text-indigo-300" />
+                        <li className="vh-stagger flex items-center gap-3 text-white/75" style={stagger(460)}>
+                            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:border-white/30">
+                                <ShieldCheck className="size-4 text-white/80" />
                             </span>
                             Data tetap aman dan hanya untuk Anda
                         </li>
@@ -132,17 +135,18 @@ export default function KelasPage() {
                 <button
                     type="button"
                     onClick={() => router.push("/auth/login")}
-                    className="mb-6 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white"
+                    className="vh-stagger group mb-6 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white"
+                    style={stagger(60)}
                 >
-                    <ArrowLeft className="size-4" />
+                    <ArrowLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-1" />
                     Kembali ke halaman login
                 </button>
 
-                <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] backdrop-blur-xl">
+                <div className="vh-stagger rounded-2xl border border-white/10 bg-white/[0.04] p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] backdrop-blur-xl" style={stagger(140)}>
                     {/* Header */}
                     <div className="mb-8 text-center">
-                        <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 shadow-lg shadow-indigo-500/40">
-                            <User className="size-6 text-white" />
+                        <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-xl bg-white shadow-lg shadow-black/60">
+                            <User className="size-6 text-black" />
                         </div>
                         <h1 className="text-2xl font-bold tracking-tight">Create an account</h1>
                         <p className="mt-1.5 text-sm text-white/50">Join us today — it only takes a minute.</p>
@@ -221,7 +225,7 @@ export default function KelasPage() {
                                         {[0, 1, 2].map((i) => (
                                             <div
                                                 key={i}
-                                                className={`h-1 flex-1 rounded-full transition-colors ${
+                                                className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
                                                     i < strengthLevel ? strengthBarColor : "bg-white/10"
                                                 }`}
                                             />
@@ -269,13 +273,13 @@ export default function KelasPage() {
                                 role="checkbox"
                                 aria-checked={acceptedterms}
                                 onClick={() => setAcceptedTerms(!acceptedterms)}
-                                className={`mt-0.5 flex size-4.5 shrink-0 items-center justify-center rounded-md border transition-colors ${
+                                className={`mt-0.5 flex size-4.5 shrink-0 items-center justify-center rounded-md border transition-all duration-200 ${
                                     acceptedterms
-                                        ? "border-indigo-400 bg-indigo-500"
-                                        : "border-white/20 bg-white/5 hover:border-white/40"
+                                        ? "scale-105 border-white bg-white"
+                                        : "border-white/20 bg-white/5 hover:scale-105 hover:border-white/40"
                                 }`}
                             >
-                                {acceptedterms && <Check className="size-3.5 text-white" strokeWidth={3} />}
+                                {acceptedterms && <Check className="size-3.5 text-black" strokeWidth={3} />}
                             </button>
                             <p
                                 onClick={() => setAcceptedTerms(!acceptedterms)}
@@ -285,7 +289,7 @@ export default function KelasPage() {
                                 <a
                                     href="#"
                                     onClick={(e) => e.preventDefault()}
-                                    className="font-medium text-indigo-400 hover:underline"
+                                    className="vh-underline font-medium text-white hover:text-white"
                                 >
                                     Terms of Service
                                 </a>{" "}
@@ -293,7 +297,7 @@ export default function KelasPage() {
                                 <a
                                     href="#"
                                     onClick={(e) => e.preventDefault()}
-                                    className="font-medium text-indigo-400 hover:underline"
+                                    className="vh-underline font-medium text-white hover:text-white"
                                 >
                                     Privacy Policy
                                 </a>
@@ -305,7 +309,7 @@ export default function KelasPage() {
                             type="submit"
                             size="lg"
                             disabled={!isformvalid}
-                            className="h-11! w-full rounded-xl! bg-gradient-to-r from-indigo-500 to-blue-600 text-sm! font-semibold! text-white! shadow-lg shadow-indigo-500/30 transition-all hover:from-indigo-400 hover:to-blue-500 hover:shadow-indigo-500/50 disabled:from-zinc-600 disabled:to-zinc-600 disabled:text-white/50 disabled:shadow-none"
+                            className="h-11! w-full rounded-xl! bg-white text-sm! font-semibold! text-black! shadow-lg shadow-black/50 transition-all hover:bg-white/90 hover:shadow-xl hover:shadow-black/60 disabled:bg-white/10 disabled:text-white/40 disabled:shadow-none"
                         >
                             Create Account
                         </Button>
@@ -316,7 +320,7 @@ export default function KelasPage() {
                         <button
                             type="button"
                             onClick={() => router.push("/auth/login")}
-                            className="font-medium text-indigo-400 transition-colors hover:underline"
+                            className="vh-underline font-medium text-white transition-colors hover:text-white"
                         >
                             Sign in
                         </button>
