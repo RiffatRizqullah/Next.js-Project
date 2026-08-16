@@ -29,11 +29,11 @@ export default function RegisterPage() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!formdata.password ||formdata.password !== formdata.confirmPassword) {
-            alert("Password and Confirm Password do not match");
+            alert("Password and Konfirmasi Password tidak cocok");
             return;
         }
         if (!acceptedterms) {
-            alert("You must accept the terms and conditions");
+            alert("Anda harus menerima syarat dan ketentuan");
             return;
         }
 
