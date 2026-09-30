@@ -1,4 +1,4 @@
-import { SidebarLayout } from "@/components/layout/app-sidebar";
+import { AppSidebar } from "@/components/layout/app-sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
