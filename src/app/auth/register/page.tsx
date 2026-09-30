@@ -4,7 +4,7 @@ import { ArrowLeft, Eye, EyeOff, Lock, Mail, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function HomePage() {
+export default function RegisterPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [accountTerms, setAccountTerms] = useState(false);

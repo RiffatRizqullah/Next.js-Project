@@ -22,7 +22,7 @@ export default function LoginPage() {
         e.preventDefault();
 
         console.log("Form submitted", formData);
-        router.push("/dashboard");
+        router.push("/Dashboard");
     };
 
     return (
