@@ -1,34 +1,28 @@
+import { SidebarLayout } from "@/components/sidebar-layout";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import type { Metadata } from "next";
-import { Poppins} from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
-import { Shell } from "@/components/layout/shell"
 
 const poppins = Poppins({
-  variable: "--font-poppins",
-  weight: ["400","700"],
-  subsets: ["latin"],
+    variable: "--font-poppins",
+    subsets: ["latin"],
+    weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Riffat Manajemen Siswa",
-  description: "Sistem Informasi Manajemen Siswa",
+    title: "Muhammad Riffat Rizqullah",
+    description: "Halaman Auth Muhammad Riffat Rizqullah",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-
-    <html
-      lang="en"
-      className={`${poppins.variable} h-full antialiased`}
-    >
-
-      <body className="min-h-full flex flex-col">
-        <Shell>{children}</Shell>
-      </body>
-    </html>
-  );
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+    return (
+        <html lang="en" suppressHydrationWarning>
+            <body className={`${poppins.variable} font-sans min-h-full flex flex-col`} suppressHydrationWarning>
+                <TooltipProvider>
+                    <SidebarLayout>{children}</SidebarLayout>
+                </TooltipProvider>
+            </body>
+        </html>
+    );
 }

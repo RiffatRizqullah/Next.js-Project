@@ -1,340 +1,209 @@
-'use client';
+"use client";
 
-import {useState} from "react";
+import { ArrowLeft, Eye, EyeOff, Lock, Mail, User } from "lucide-react";
 import { useRouter } from "next/navigation";
-import {Eye,EyeOff,User,Lock,Mail,ArrowLeft,Check,GraduationCap,ClipboardList,BarChart3,ShieldCheck,Gamepad2, Laptop} from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import type { CSSProperties } from "react";
-export default function RegisterPage() {
+import { useState } from "react";
+
+export default function HomePage() {
     const [showPassword, setShowPassword] = useState(false);
-    const [showconfirmPassword, setShowConfirmPassword] = useState(false);
-    const [acceptedterms, setAcceptedTerms] = useState(false);
-    const [formdata, setFormData] = useState({
-        name: "",
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [accountTerms, setAccountTerms] = useState(false);
+    const [formData, setFormData] = useState({
+        username: "",
         email: "",
         password: "",
         confirmPassword: "",
     });
+
     const router = useRouter();
-    
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formdata,
-            [name]: value,
-        });
-    }
+        setFormData({ ...formData, [name]: value });
+    };
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (!formdata.password ||formdata.password !== formdata.confirmPassword) {
-            alert("Password and Konfirmasi Password tidak cocok");
-            return;
-        }
-        if (!acceptedterms) {
-            alert("Anda harus menerima syarat dan ketentuan");
+
+        if (!accountTerms) {
+            alert("You must accept the terms and conditions to register.");
             return;
         }
 
-        console.log("Form Data:", formdata);
+        if (formData.password !== formData.confirmPassword) {
+            alert("Passwords do not match.");
+            return;
+        }
+
+        console.log("Form submitted", formData);
         router.push("/auth/login");
-    }
+    };
 
+    const getPasswordStrength = (password: string) => {
+        if (password.length > 12) return { text: "Strong", color: "text-green-600" };
+        if (password.length > 8) return { text: "Medium", color: "text-yellow-600" };
+        if (password.length < 6) return { text: "Weak", color: "text-red-600" };
+        return { text: "", color: "" };
+    };
 
-    const getpasswordstrength = (password: string) => {
-        if(!password){
-            return {text: "", color: "text-white/40"};
-        } else if (password.length < 6) {
-            return {text: "lemah", color: "text-white/40"};
-        } else if (password.length < 10) {
-            return {text: "sedang", color: "text-white/70"};
-        } else {
-            return {text: "kuat", color: "text-white"};
-        }
-    }
-
-    const passwordStrength = getpasswordstrength(formdata.password);
-    const strengthLevel =
-        passwordStrength.text === "lemah" ? 1 : passwordStrength.text === "sedang" ? 2 : passwordStrength.text === "kuat" ? 3 : 0;
-    const strengthBarColor =
-        passwordStrength.text === "lemah"
-            ? "bg-white/30"
-            : passwordStrength.text === "sedang"
-              ? "bg-white/60"
-              : passwordStrength.text === "kuat"
-                ? "bg-white"
-                : "bg-white/10";
-
-    const isformvalid = formdata.name && formdata.email && formdata.password && formdata.confirmPassword && acceptedterms;
-
-    const inputClass =
-        "h-11! w-full rounded-xl! border border-white/10! bg-white/[0.04]! pl-10! pr-10! text-sm! text-white! placeholder:text-white/30! focus-visible:border-white/70! focus-visible:ring-3! focus-visible:ring-white/15!";
-
-    const stagger = (ms: number) => ({ "--vh-delay": `${ms}ms` }) as CSSProperties;
+    const passwordStrength = getPasswordStrength(formData.password);
+    const isFormValid = accountTerms && formData.password && formData.password === formData.confirmPassword;
 
     return (
-        <div className="register-page relative flex min-h-screen w-full overflow-hidden bg-black text-white">
-            {/* Left decorations */}
-            <div className="pointer-events-none absolute inset-0">
-                    <div className="absolute -top-32 -left-32 h-[30rem] w-[30rem] rounded-full bg-white/[0.04] blur-3xl" />
-                    <div className="absolute top-1/2 -right-24 h-[26rem] w-[26rem] -translate-y-1/2 rounded-full bg-white/[0.03] blur-3xl" />
-                    <div className="absolute -bottom-40 left-1/4 h-96 w-96 rounded-full bg-white/[0.02] blur-3xl" />
-                    <div
-                        className="absolute inset-0 opacity-[0.12]"
-                        style={{
-                            backgroundImage:
-                                "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
-                            backgroundSize: "48px 48px",
-                        }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-                </div>
-            <div className="relative hidden w-1/2 overflow-hidden lg:block">
-                
-
-                <div className="relative z-10 flex h-full flex-col justify-center px-12 py-12 xl:px-16">
-                    <div className="vh-stagger mb-8 flex size-14 items-center justify-center rounded-2xl bg-white shadow-xl shadow-black/60" style={stagger(60)}>
-                        <GraduationCap className="size-7 text-black" />
-                    </div>
-                    <h1 className="vh-stagger text-4xl leading-tight font-bold tracking-tight" style={stagger(140)}>
-                        <span className="text-white/85">
-                            Muhammad
-                        </span>
-                        {""} Riffat {" "}
-                        <span className="text-white/85">
-                            Rizqullah
-                        </span>
-                    </h1>
-                    <p className="vh-stagger mt-4 max-w-md text-lg leading-relaxed text-white/60" style={stagger(220)}>
-                        Menyediakan Software Tools untuk Windows dan Android, dan Permainan Video yang dapat dimainkan dengan gratis.
-                    </p>
-                    <ul className="mt-10 space-y-4">
-                        <li className="vh-stagger flex items-center gap-3 text-white/75" style={stagger(300)}>
-                            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:border-white/30">
-                                <Laptop className="size-4 text-white/80" />
-                            </span>
-                            Unduh software dan gunakan secara online maupun offline
-                        </li>
-                        <li className="vh-stagger flex items-center gap-3 text-white/75" style={stagger(300)}>
-                            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:border-white/30">
-                                <Gamepad2 className="size-4 text-white/80" />
-                            </span>
-                            Unduh permainan video dan dapat dimainkan kapan saja
-                        </li>
-                        <li className="vh-stagger flex items-center gap-3 text-white/75" style={stagger(380)}>
-                            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:border-white/30">
-                                <BarChart3 className="size-4 text-white/80" />
-                            </span>
-                            Dapatkan update fitur terbaru secara otomatis dan gratis
-                        </li>
-                        <li className="vh-stagger flex items-center gap-3 text-white/75" style={stagger(460)}>
-                            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:border-white/30">
-                                <ShieldCheck className="size-4 text-white/80" />
-                            </span>
-                            Data tetap aman dan hanya untuk Anda
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            {/* Right: register panel */}
-            <div className="relative flex w-full items-center justify-center px-4 py-10 lg:w-1/2">
-                <div className="w-full max-w-md">
-                <button
-                    type="button"
-                    onClick={() => router.push("/auth/login")}
-                    className="vh-stagger group mb-6 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white"
-                    style={stagger(60)}
-                >
-                    <ArrowLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-1" />
-                    Kembali ke halaman login
-                </button>
-
-                <div className="vh-stagger rounded-2xl border border-white/10 bg-white/[0.04] p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] backdrop-blur-xl" style={stagger(140)}>
-                    {/* Header */}
-                    <div className="mb-8 text-center">
-                        <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-xl bg-white shadow-lg shadow-black/60">
-                            <User className="size-6 text-black" />
-                        </div>
-                        <h1 className="text-2xl font-bold tracking-tight">Buat akun baru</h1>
-                        <p className="mt-1.5 text-sm text-white/50">Gabung sekarang — cuma butuh semenit.</p>
-                    </div>
-
-                    <form onSubmit={handleSubmit} className="space-y-5">
-                        {/* Name */}
-                        <div>
-                            <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-white/80">
-                                Nama
-                            </label>
-                            <div className="relative">
-                                <User className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/40" />
-                                <Input
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    placeholder="Masukkan nama lengkap Anda"
-                                    autoComplete="name"
-                                    value={formdata.name}
-                                    onChange={handleInputChange}
-                                    className={inputClass}
-                                />
+        <div className="min-h-screen bg-gradient-to-r from-blue-50 via-white to-blue-100 flex items-center justify-center p-4">
+            <div className="w-full max-w-md">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-blue-100 p-8 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-blue-600/10 rounded-2xl" />
+                    <div className="relative z-10">
+                        {/* <a
+                            href="/auth/login"
+                            className="flex items-center gap-2 text-gray-600 hover:text-gray-800 mb-6"
+                        >
+                            <ArrowLeft className="w-4 h-4"></ArrowLeft>
+                            Back to login
+                        </a> */}
+                        <div className="text-center mb-6">
+                            <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-500/5 to-blue-600/100 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                                <User className="w-8 h-8 text-white" />
                             </div>
+                            <h1 className="text-3xl font-bold text-gray-800 mb-2">Create Account</h1>
+                            <p className="text-gray-600">Join us today! It takes only a few steps.</p>
                         </div>
-
-                        {/* Email */}
-                        <div>
-                            <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-white/80">
-                                Email
-                            </label>
-                            <div className="relative">
-                                <Mail className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/40" />
-                                <Input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    placeholder="you@example.com"
-                                    autoComplete="email"
-                                    value={formdata.email}
-                                    onChange={handleInputChange}
-                                    className={inputClass}
-                                />
-                            </div>
-                        </div>
-
-                        {/* Password */}
-                        <div>
-                            <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-white/80">
-                                Password
-                            </label>
-                            <div className="relative">
-                                <Lock className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/40" />
-                                <Input
-                                    id="password"
-                                    name="password"
-                                    type={showPassword ? "text" : "password"}
-                                    placeholder="Buat password"
-                                    autoComplete="new-password"
-                                    value={formdata.password}
-                                    onChange={handleInputChange}
-                                    className={inputClass}
-                                />
-                                <button
-                                    type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    aria-label={showPassword ? "Hide password" : "Show password"}
-                                    className="absolute top-1/2 right-3 -translate-y-1/2 text-white/40 transition-colors hover:text-white"
-                                >
-                                    {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-                                </button>
-                            </div>
-                            {formdata.password && (
-                                <div className="mt-2">
-                                    <div className="flex gap-1.5">
-                                        {[0, 1, 2].map((i) => (
-                                            <div
-                                                key={i}
-                                                className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
-                                                    i < strengthLevel ? strengthBarColor : "bg-white/10"
-                                                }`}
-                                            />
-                                        ))}
-                                    </div>
-                                    <p className={`mt-1 text-xs font-medium ${passwordStrength.color}`}>
-                                         Password {passwordStrength.text}
-                                    </p>
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-gray-700" htmlFor="username">
+                                    Name
+                                </label>
+                                <div className="relative">
+                                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"></User>
+                                    <input
+                                        name="username"
+                                        value={formData.username}
+                                        onChange={handleInputChange}
+                                        type="text"
+                                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        placeholder="Enter your name"
+                                        required
+                                    />
                                 </div>
-                            )}
-                        </div>
-
-                        {/* Confirm Password */}
-                        <div>
-                            <label htmlFor="confirmPassword" className="mb-1.5 block text-sm font-medium text-white/80">
-                                Konfirmasi Password
-                            </label>
-                            <div className="relative">
-                                <Lock className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/40" />
-                                <Input
-                                    id="confirmPassword"
-                                    name="confirmPassword"
-                                    type={showconfirmPassword ? "text" : "password"}
-                                    placeholder="Konfirmasi password"
-                                    autoComplete="new-password"
-                                    value={formdata.confirmPassword}
-                                    onChange={handleInputChange}
-                                    className={inputClass}
-                                />
-                                <button
-                                    type="button"
-                                    onClick={() => setShowConfirmPassword(!showconfirmPassword)}
-                                    aria-label={showconfirmPassword ? "Hide confirm password" : "Show confirm password"}
-                                    className="absolute top-1/2 right-3 -translate-y-1/2 text-white/40 transition-colors hover:text-white"
-                                >
-                                    {showconfirmPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-                                </button>
                             </div>
-                        </div>
-
-                        {/* Terms checkbox */}
-                        <div className="flex items-start gap-3">
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-gray-700" htmlFor="email">
+                                    Email
+                                </label>
+                                <div className="relative">
+                                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"></Mail>
+                                    <input
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleInputChange}
+                                        type="email"
+                                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        placeholder="Enter your email"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-gray-700" htmlFor="password">
+                                    Password
+                                </label>
+                                <div className="relative">
+                                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"></Lock>
+                                    <input
+                                        name="password"
+                                        value={formData.password}
+                                        onChange={handleInputChange}
+                                        type={showPassword ? "text" : "password"}
+                                        className="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        placeholder="Enter your password"
+                                        required
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                    >
+                                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                                    </button>
+                                </div>
+                                {formData.password && (
+                                    <div className={`text-sm font-medium mt-1 ${passwordStrength.color}`}>
+                                        {passwordStrength.text}
+                                    </div>
+                                )}
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-gray-700" htmlFor="confirmPassword">
+                                    Confirm Password
+                                </label>
+                                <div className="relative">
+                                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"></Lock>
+                                    <input
+                                        name="confirmPassword"
+                                        value={formData.confirmPassword}
+                                        onChange={handleInputChange}
+                                        type={showConfirmPassword ? "text" : "password"}
+                                        className="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        placeholder="Enter your confirm password"
+                                        required
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                    >
+                                        {showConfirmPassword ? (
+                                            <EyeOff className="w-5 h-5" />
+                                        ) : (
+                                            <Eye className="w-5 h-5" />
+                                        )}
+                                    </button>
+                                </div>
+                                {formData.confirmPassword &&
+                                    (formData.password !== formData.confirmPassword ? (
+                                        <div className="text-sm font-medium mt-1 text-red-500">
+                                            Confirm Password does not match
+                                        </div>
+                                    ) : (
+                                        <div className="text-sm font-medium mt-1 text-green-600">
+                                            Confirm Password matches
+                                        </div>
+                                    ))}
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <input
+                                    type="checkbox"
+                                    checked={accountTerms}
+                                    onChange={e => setAccountTerms(e.target.checked)}
+                                    name="terms"
+                                    id="terms"
+                                    className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                />
+                                <label htmlFor="terms" className="text-sm text-gray-600">
+                                    I agree to the{" "}
+                                    <a href="#" className="text-blue-500 hover:underline">
+                                        Terms and Conditions
+                                    </a>
+                                </label>
+                            </div>
                             <button
-                                type="button"
-                                role="checkbox"
-                                aria-checked={acceptedterms}
-                                onClick={() => setAcceptedTerms(!acceptedterms)}
-                                className={`mt-0.5 flex size-4.5 shrink-0 items-center justify-center rounded-md border transition-all duration-200 ${
-                                    acceptedterms
-                                        ? "scale-105 border-white bg-white"
-                                        : "border-white/20 bg-white/5 hover:scale-105 hover:border-white/40"
-                                }`}
+                                type="submit"
+                                disabled={!isFormValid}
+                                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-xl font-medium hover:from-blue-600 hover:to-blue-700 transition hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none transition-all"
                             >
-                                {acceptedterms && <Check className="size-3.5 text-black" strokeWidth={3} />}
+                                Register
                             </button>
-                            <p
-                                onClick={() => setAcceptedTerms(!acceptedterms)}
-                                className="cursor-pointer text-sm leading-relaxed text-white/60 select-none"
-                            >
-                                Aku telah menyetujui{" "}
-                                <a
-                                    href="#"
-                                    onClick={(e) => e.preventDefault()}
-                                    className="vh-underline font-medium text-white hover:text-white"
-                                >
-                                    Syarat & Ketentuan Layanan
-                                </a>{" "}
-                                dan{" "}
-                                <a
-                                    href="#"
-                                    onClick={(e) => e.preventDefault()}
-                                    className="vh-underline font-medium text-white hover:text-white"
-                                >
-                                    Kebijakan Privasi
-                                </a>
-                            </p>
-                        </div>
-
-                        {/* Submit */}
-                        <Button
-                            type="submit"
-                            size="lg"
-                            disabled={!isformvalid}
-                            className="h-11! w-full rounded-xl! bg-white text-sm! font-semibold! text-black! shadow-lg shadow-black/50 transition-all hover:bg-white/90 hover:shadow-xl hover:shadow-black/60 disabled:bg-white/10 disabled:text-white/40 disabled:shadow-none"
-                        >
-                            Create Account
-                        </Button>
-                    </form>
-
-                    <p className="mt-6 text-center text-sm text-white/50">
-                        Sudah punya akun?{" "}
-                        <button
-                            type="button"
-                            onClick={() => router.push("/auth/login")}
-                            className="vh-underline font-medium text-white transition-colors hover:text-white"
-                        >
-                            Login
-                        </button>
-                    </p>
-                </div>
+                            <div className="text-center">
+                                <p className="text-sm text-gray-600">
+                                    Already have an account?{" "}
+                                    <a href="/auth/login" className="text-blue-600 hover:underline">
+                                        Login
+                                    </a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
