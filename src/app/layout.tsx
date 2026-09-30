@@ -20,7 +20,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en" suppressHydrationWarning>
             <body className={`${poppins.variable} font-sans min-h-full flex flex-col`} suppressHydrationWarning>
                 <TooltipProvider>
-                    <SidebarLayout>{children}</SidebarLayout>
+                    <AppSidebar>
+                        {children}
+                    </AppSidebar>
                 </TooltipProvider>
             </body>
         </html>
