@@ -54,7 +54,7 @@ export default function LoginPage() {
                                         value={formData.email}
                                         onChange={handleInputChange}
                                         type="email"
-                                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                                         placeholder="Enter your email"
                                         required
                                     />
@@ -65,13 +65,13 @@ export default function LoginPage() {
                                     Password
                                 </label>
                                 <div className="relative">
-                                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"></Lock>
+                                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 "></Lock>
                                     <input
                                         name="password"
                                         value={formData.password}
                                         onChange={handleInputChange}
                                         type={showPassword ? "text" : "password"}
-                                        className="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                                         placeholder="Enter your password"
                                         required
                                     />

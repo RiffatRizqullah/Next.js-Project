@@ -81,7 +81,7 @@ export default function HomePage() {
                                         value={formData.username}
                                         onChange={handleInputChange}
                                         type="text"
-                                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                                         placeholder="Enter your name"
                                         required
                                     />
@@ -98,7 +98,7 @@ export default function HomePage() {
                                         value={formData.email}
                                         onChange={handleInputChange}
                                         type="email"
-                                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                                         placeholder="Enter your email"
                                         required
                                     />
@@ -115,7 +115,7 @@ export default function HomePage() {
                                         value={formData.password}
                                         onChange={handleInputChange}
                                         type={showPassword ? "text" : "password"}
-                                        className="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                                         placeholder="Enter your password"
                                         required
                                     />
@@ -144,7 +144,7 @@ export default function HomePage() {
                                         value={formData.confirmPassword}
                                         onChange={handleInputChange}
                                         type={showConfirmPassword ? "text" : "password"}
-                                        className="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                                         placeholder="Enter your confirm password"
                                         required
                                     />
