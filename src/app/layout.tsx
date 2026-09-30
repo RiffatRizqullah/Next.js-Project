@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/layout/app-sidebar";
+
 import { TooltipProvider } from "@/components/ui/tooltip";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
@@ -20,9 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en" suppressHydrationWarning>
             <body className={`${poppins.variable} font-sans min-h-full flex flex-col`} suppressHydrationWarning>
                 <TooltipProvider>
-                    <AppSidebar>
                         {children}
-                    </AppSidebar>
                 </TooltipProvider>
             </body>
         </html>
